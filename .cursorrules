@@ -1,0 +1,89 @@
+{
+  "goals": [
+    "Build a professional, clean, accessible, and responsive website",
+    "Code must be modular, reusable, readable, and follow modern front-end best practices",
+    "Use semantic, accessible HTML and responsive layouts with Tailwind CSS",
+    "Include a CMS-ready architecture using a headless CMS (mock data if necessary)",
+    "Optimize for performance, SEO, and developer maintainability",
+    "Avoid unnecessary complexity or unused code"
+  ],
+  "techStack": {
+    "framework": "Next.js (preferably App Router with TypeScript)",
+    "language": "TypeScript",
+    "cms": "Sanity or headless WordPress, mocked with JSON if not integrated yet",
+    "styling": "Tailwind CSS (preferred), fallback to CSS Modules if needed"
+  },
+  "structure": {
+    "rootFolders": [
+      "app",
+      "components",
+      "public",
+      "styles",
+      "cms",
+      "utils",
+      "types"
+    ],
+    "fileNaming": "kebab-case for files and folders; PascalCase for React components",
+    "componentStyle": "React functional components using hooks and props",
+    "cssApproach": "Tailwind CSS with responsive and utility-first classes"
+  },
+  "cms": {
+    "approach": "CMS integration-ready components",
+    "method": "Use mocked JSON fetch or static props that simulate CMS output",
+    "dataFlow": "Prefer static generation (getStaticProps or generateStaticParams), fallback to dynamic fetch only when required",
+    "examples": {
+      "services": "CMS-powered dynamic cards for coaching/training programs",
+      "blog": "Dynamically loaded blog posts from CMS",
+      "testimonials": "Client testimonials fetched from CMS or JSON",
+      "team": "Team section managed via CMS"
+    }
+  },
+  "responsiveness": {
+    "breakpoints": [
+      "mobile (default)",
+      "tablet (sm/md)",
+      "desktop (lg/xl)"
+    ],
+    "design": "Mobile-first with responsive Tailwind utilities; use Flex/Grid layout with spacing and alignment"
+  },
+  "seo": {
+    "metaTags": true,
+    "semanticTags": true,
+    "openGraphTags": true,
+    "accessibleDesign": true,
+    "ariaLabels": true
+  },
+  "performance": {
+    "lazyLoad": [
+      "images using next/image",
+      "videos only when visible"
+    ],
+    "optimize": [
+      "images (responsive sizes)",
+      "Google fonts or self-hosted fonts",
+      "code splitting via dynamic imports"
+    ],
+    "bundleSplitting": true,
+    "useNextImage": true
+  },
+  "accessibility": {
+    "ariaSupport": true,
+    "keyboardNavigation": true,
+    "altText": "All images must include meaningful alt tags"
+  },
+  "conventions": {
+    "includeHeadComponent": true,
+    "pseudocodeBeforeCode": true,
+    "noClassComponents": true,
+    "useNextLinkForInternalNav": true,
+    "useHeadForSEOMetadata": true,
+    "alwaysExportComponents": true
+  },
+  "doNotInclude": [
+    "overly complex abstractions",
+    "unused libraries or dependencies",
+    "inline styling (unless unavoidable)",
+    "class components or legacy patterns",
+    "duplicate styles or repeated Tailwind utility chains"
+  ]
+}
