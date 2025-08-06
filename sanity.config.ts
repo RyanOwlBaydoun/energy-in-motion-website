@@ -2,9 +2,8 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 
-// Define schemas that actually exist
-import assessment from "./sanity/schemas/assessment";
-import testimonial from "./sanity/schemas/testimonial";
+// Import all schemas from the complete schema collection
+import { schemaTypes } from "./energy-in-motion/schemaTypes";
 
 export default defineConfig({
   name: "energy-in-motion",
@@ -16,10 +15,6 @@ export default defineConfig({
   plugins: [structureTool(), visionTool()],
 
   schema: {
-    types: [
-      // Individual content schemas
-      assessment,
-      testimonial,
-    ],
+    types: schemaTypes,
   },
 });
