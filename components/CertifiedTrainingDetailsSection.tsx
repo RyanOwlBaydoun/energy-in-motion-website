@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { TrainingCourse, trainingCourses } from "@/utils/training-courses";
-import { LegacyTrainingCourse } from "@/types/sanity";
+import { LegacyTrainingCourse, TrainingMainPage } from "@/types/sanity";
 
 interface CertifiedTrainingDetailsSectionProps {
   currentCourse: LegacyTrainingCourse;
