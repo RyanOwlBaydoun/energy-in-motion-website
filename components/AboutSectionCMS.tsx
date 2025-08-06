@@ -32,27 +32,31 @@ const AboutSectionCMS: React.FC<AboutSectionCMSProps> = ({
 
   // Default values from CMS or fallback - use either aboutData or homeData
   const dataSource = aboutData || homeData;
+  
+  // Handle both AboutMainPage (sarahSection) and HomeMainPage (aboutSarahSection)
+  const sarahData = (dataSource as any)?.sarahSection || (dataSource as any)?.aboutSarahSection;
+  
   const sectionLabel =
-    dataSource?.aboutSarahSection?.sectionLabel || "// ABOUT US";
-  const title = dataSource?.aboutSarahSection?.title || "Meet Sarah Daou";
+    sarahData?.sectionLabel || "// ABOUT US";
+  const title = sarahData?.title || "Meet Sarah Daou";
   const subtitle =
-    dataSource?.aboutSarahSection?.subtitle || "Empowering Leaders.";
+    sarahData?.subtitle || "Empowering Leaders.";
   const description =
-    dataSource?.aboutSarahSection?.description ||
+    sarahData?.description ||
     "Elevating Emotional Intelligence.";
-  const photoUrl = dataSource?.aboutSarahSection?.photo
-    ? getSanityImageUrl(dataSource.aboutSarahSection.photo)
+  const photoUrl = sarahData?.photo
+    ? getSanityImageUrl(sarahData.photo)
     : "/images/about/sarah-dao.jpg";
-  const credentials = dataSource?.aboutSarahSection?.credentials || [
+  const credentials = sarahData?.credentials || [
     "Certified Hogan, ECR, ECR 360, ECR Youth Assessor",
     "Emotional Intelligence Practitioner – Six Seconds",
     "Advanced Coaching Diploma – Noble Manhattan UK",
     "Inspirational Leadership – Case Western Reserve University",
   ];
   const buttonText =
-    dataSource?.aboutSarahSection?.buttonText || "Explore more";
+    sarahData?.buttonText || "Explore more";
   const buttonLink =
-    dataSource?.aboutSarahSection?.buttonLink || "/about/sarah";
+    sarahData?.buttonLink || "/about/sarah";
 
   return (
     <section className="w-full bg-white py-20 lg:py-28">
