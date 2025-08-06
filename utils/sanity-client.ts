@@ -4,8 +4,8 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "hy425cry";
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 const token = process.env.SANITY_API_TOKEN;
 
-// Ensure projectId is lowercase (Sanity requirement)
-const normalizedProjectId = projectId.toLowerCase();
+// Ensure projectId is lowercase and only contains valid characters
+const normalizedProjectId = projectId.toLowerCase().replace(/[^a-z0-9-]/g, '');
 
 if (!normalizedProjectId || !dataset) {
   throw new Error("Missing Sanity project configuration");
