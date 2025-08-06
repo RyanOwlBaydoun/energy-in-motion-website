@@ -22,12 +22,15 @@ const AboutSectionCMS: React.FC<AboutSectionCMSProps> = ({
     const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "hy425cry";
     const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 
+    // Clean projectId to remove any whitespace or line breaks
+    const normalizedProjectId = projectId.toString().toLowerCase().replace(/[^a-z0-9-]/g, "").replace(/\s+/g, "").trim();
+
     // Extract image ID and extension from ref
     const parts = ref.replace("image-", "").split("-");
     const extension = parts.pop();
     const imageId = parts.join("-");
 
-    return `https://cdn.sanity.io/images/${projectId}/${dataset}/${imageId}.${extension}`;
+    return `https://cdn.sanity.io/images/${normalizedProjectId}/${dataset}/${imageId}.${extension}`;
   };
 
   // Default values from CMS or fallback - use either aboutData or homeData
