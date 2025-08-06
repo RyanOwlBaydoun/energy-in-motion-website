@@ -32,18 +32,16 @@ const AboutSectionCMS: React.FC<AboutSectionCMSProps> = ({
 
   // Default values from CMS or fallback - use either aboutData or homeData
   const dataSource = aboutData || homeData;
-  
+
   // Handle both AboutMainPage (sarahSection) and HomeMainPage (aboutSarahSection)
-  const sarahData = (dataSource as any)?.sarahSection || (dataSource as any)?.aboutSarahSection;
-  
-  const sectionLabel =
-    sarahData?.sectionLabel || "// ABOUT US";
+  const sarahData =
+    (dataSource as any)?.sarahSection || (dataSource as any)?.aboutSarahSection;
+
+  const sectionLabel = sarahData?.sectionLabel || "// ABOUT US";
   const title = sarahData?.title || "Meet Sarah Daou";
-  const subtitle =
-    sarahData?.subtitle || "Empowering Leaders.";
+  const subtitle = sarahData?.subtitle || "Empowering Leaders.";
   const description =
-    sarahData?.description ||
-    "Elevating Emotional Intelligence.";
+    sarahData?.description || "Elevating Emotional Intelligence.";
   const photoUrl = sarahData?.photo
     ? getSanityImageUrl(sarahData.photo)
     : "/images/about/sarah-dao.jpg";
@@ -53,10 +51,8 @@ const AboutSectionCMS: React.FC<AboutSectionCMSProps> = ({
     "Advanced Coaching Diploma – Noble Manhattan UK",
     "Inspirational Leadership – Case Western Reserve University",
   ];
-  const buttonText =
-    sarahData?.buttonText || "Explore more";
-  const buttonLink =
-    sarahData?.buttonLink || "/about/sarah";
+  const buttonText = sarahData?.buttonText || "Explore more";
+  const buttonLink = sarahData?.buttonLink || "/about/sarah";
 
   return (
     <section className="w-full bg-white py-20 lg:py-28">
@@ -119,7 +115,7 @@ const AboutSectionCMS: React.FC<AboutSectionCMSProps> = ({
 
           {/* Credentials List */}
           <div className="space-y-3">
-            {credentials.map((credential, index) => (
+            {credentials.map((credential: string, index: number) => (
               <div key={index} className="flex items-start gap-3">
                 <div className="w-2 h-2 bg-[#FF6B57] rounded-full mt-2 flex-shrink-0"></div>
                 <p className="text-[#0B2B2E] text-base leading-relaxed">
