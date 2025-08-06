@@ -5,7 +5,12 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 const token = process.env.SANITY_API_TOKEN;
 
 // Ensure projectId is lowercase and only contains valid characters
-const normalizedProjectId = projectId.toLowerCase().replace(/[^a-z0-9-]/g, "").trim();
+const normalizedProjectId = projectId
+  .toString()
+  .toLowerCase()
+  .replace(/[^a-z0-9-]/g, "")
+  .replace(/\s+/g, "") // Remove all whitespace including line breaks
+  .trim();
 
 if (!normalizedProjectId || !dataset) {
   throw new Error("Missing Sanity project configuration");
