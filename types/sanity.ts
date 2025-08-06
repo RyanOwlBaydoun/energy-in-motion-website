@@ -41,7 +41,7 @@ export interface TrainingCourse {
   featured: boolean;
   publishedAt: string;
   heroImage?: SanityImage;
-  displayBoxPhoto: boolean;
+  displayBoxPhoto?: boolean;
 }
 
 export interface TrainingMainPage {
@@ -91,7 +91,7 @@ export interface CoachingProgram {
   featured: boolean;
   publishedAt: string;
   heroImage?: SanityImage;
-  displayBoxPhoto: boolean;
+  displayBoxPhoto?: boolean;
 }
 
 export interface CoachingMainPage {
@@ -141,7 +141,7 @@ export interface EmotionProgram {
   featured: boolean;
   publishedAt: string;
   heroImage?: SanityImage;
-  displayBoxPhoto: boolean;
+  displayBoxPhoto?: boolean;
 }
 
 export interface EmotionMainPage {
@@ -183,7 +183,7 @@ export interface Assessment {
   publishedAt: string;
   assessmentImage?: SanityImage;
   externalLink?: string;
-  displayBoxPhoto: boolean;
+  displayBoxPhoto?: boolean;
 }
 
 export interface AssessmentMainPage {
@@ -353,7 +353,7 @@ export interface LegacyTrainingCourse {
   keyBenefits: string[];
   category: string;
   heroImage?: string;
-  displayBoxPhoto: boolean;
+  displayBoxPhoto?: boolean;
 }
 
 export interface LegacyCoachingProgram {
@@ -379,7 +379,7 @@ export interface LegacyCoachingProgram {
   keyBenefits: string[];
   category: string;
   heroImage?: string;
-  displayBoxPhoto: boolean;
+  displayBoxPhoto?: boolean;
 }
 
 export interface LegacyEmotionProgram {
@@ -405,7 +405,7 @@ export interface LegacyEmotionProgram {
   keyBenefits: string[];
   category: string;
   heroImage?: string;
-  displayBoxPhoto: boolean;
+  displayBoxPhoto?: boolean;
 }
 
 export interface LegacyAssessment {
@@ -423,7 +423,7 @@ export interface LegacyAssessment {
   category: string;
   externalLink?: string;
   assessmentImage?: any; // Sanity image object
-  displayBoxPhoto: boolean;
+  displayBoxPhoto?: boolean;
 }
 
 // Utility function to convert Sanity data to legacy format
@@ -460,7 +460,7 @@ export function convertToLegacyFormat(
     keyBenefits: sanityData.keyBenefits || [],
     category: sanityData.category,
     heroImage: imageUrl,
-    displayBoxPhoto: sanityData.displayBoxPhoto,
+    displayBoxPhoto: sanityData.displayBoxPhoto ?? false,
   };
 }
 
