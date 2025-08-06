@@ -43,13 +43,16 @@ const AssessmentHeroSectionCMS: React.FC<AssessmentHeroSectionProps> = ({
     : "/images/hero/hero-coach.jpg"; // Fallback assessment hero image
   const overlayOpacity = assessmentMainData?.heroOverlayOpacity || 0.4;
 
+  // Ensure heroImageUrl is always a string
+  const finalHeroImageUrl = heroImageUrl || "/images/hero/hero-coach.jpg";
+
   return (
     <section className="w-full bg-white">
       <div className="max-w-[1300px] mx-auto px-6 pt-10 pb-20">
         {/* Shared Hero Image - Used across ALL assessment pages */}
         <div className="relative rounded-[24px] w-full h-[315px] md:h-[400px] overflow-hidden">
           <Image
-            src={getCacheBustedImageUrl(heroImageUrl)}
+            src={getCacheBustedImageUrl(finalHeroImageUrl)}
             alt={`${title} - ${subtitle} ${description}`}
             fill
             className="object-cover"
