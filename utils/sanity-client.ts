@@ -4,13 +4,16 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "hy425cry";
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 const token = process.env.SANITY_API_TOKEN;
 
-if (!projectId || !dataset) {
+// Ensure projectId is lowercase (Sanity requirement)
+const normalizedProjectId = projectId.toLowerCase();
+
+if (!normalizedProjectId || !dataset) {
   throw new Error("Missing Sanity project configuration");
 }
 
 // Client for fetching data in the app
 export const sanityClient = createClient({
-  projectId,
+  projectId: normalizedProjectId,
   dataset,
   useCdn: false, // Disable CDN for development to avoid caching issues
   apiVersion: "2023-12-12",
@@ -20,7 +23,7 @@ export const sanityClient = createClient({
 
 // Client for mutations (writing data) - requires auth token
 export const sanityWriteClient = createClient({
-  projectId,
+  projectId: normalizedProjectId,
   dataset,
   useCdn: false,
   apiVersion: "2023-12-12",
@@ -39,7 +42,7 @@ export function urlFor(source: any) {
   const extension = parts.pop();
   const imageId = parts.join("-");
 
-  return `https://cdn.sanity.io/images/${projectId}/${dataset}/${imageId}.${extension}`;
+  return `https://cdn.sanity.io/images/${normalizedProjectId}/${dataset}/${imageId}.${extension}`;
 }
 
 // Enhanced utility function for image URLs with width/height
@@ -57,7 +60,7 @@ export function getSanityImageUrl(source: any) {
   const extension = parts.pop();
   const imageId = parts.join("-");
 
-  const baseUrl = `https://cdn.sanity.io/images/${projectId}/${dataset}/${imageId}.${extension}`;
+  const baseUrl = `https://cdn.sanity.io/images/${normalizedProjectId}/${dataset}/${imageId}.${extension}`;
 
   return {
     width: (w: number) => ({
