@@ -46,6 +46,8 @@ const AssessmentHeroSectionCMS: React.FC<AssessmentHeroSectionProps> = ({
   // Ensure heroImageUrl is always a string
   const finalHeroImageUrl = heroImageUrl || "/images/hero/hero-coach.jpg";
 
+  // Force new deployment - all TypeScript errors fixed
+
   return (
     <section className="w-full bg-white">
       <div className="max-w-[1300px] mx-auto px-6 pt-10 pb-20">

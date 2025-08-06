@@ -134,7 +134,7 @@ const TestSanityCMSSection: React.FC<TestSanityCMSSectionProps> = ({
               </h4>
               <p className="text-gray-600 mt-2 text-sm">{course.description}</p>
               <div className="mt-2 text-xs text-gray-500">
-                Category: {course.category} | Slug: {course.slug}
+                Category: {course.category} | Slug: {typeof course.slug === 'string' ? course.slug : course.slug?.current || 'N/A'}
               </div>
             </div>
           ))}

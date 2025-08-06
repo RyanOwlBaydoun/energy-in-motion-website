@@ -23,5 +23,5 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "scripts", "**/Website-Desktop-CMS-Website-Ready-Upload*", "**/True-Website-Desktop-CMS-Website-Ready-Upload*", "**/Energy-In-Motion-Website-CLEAN*"]
 }

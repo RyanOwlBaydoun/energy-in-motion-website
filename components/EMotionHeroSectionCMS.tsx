@@ -36,12 +36,15 @@ const EMotionHeroSectionCMS: React.FC<EMotionHeroSectionProps> = ({
 
   // Default values if no CMS data
   const title = emotionMainData?.title || "E-MOTION";
-  const subtitle = emotionMainData?.subtitle || "Express. Explore.";
-  const description = emotionMainData?.description || "Emotional Freedom.";
+  const subtitle = emotionMainData?.subtitle || "Emotional Intelligence.";
+  const description = emotionMainData?.description || "Real Change.";
   const heroImageUrl = emotionMainData?.heroImage
     ? getImageUrl(emotionMainData.heroImage)
     : "/images/hero/E-Motion_Hero.jpeg";
   const overlayOpacity = emotionMainData?.heroOverlayOpacity || 0.4;
+
+  // Ensure heroImageUrl is always a string
+  const finalHeroImageUrl = heroImageUrl || "/images/hero/E-Motion_Hero.jpeg";
 
   return (
     <section className="w-full bg-white">
@@ -49,7 +52,7 @@ const EMotionHeroSectionCMS: React.FC<EMotionHeroSectionProps> = ({
         {/* Hero Image with Overlay - Rectangular Form - Matches About/Training/Coaching Pages */}
         <div className="relative rounded-[24px] w-full h-[315px] md:h-[400px] overflow-hidden">
           <Image
-            src={getCacheBustedImageUrl(heroImageUrl)}
+            src={getCacheBustedImageUrl(finalHeroImageUrl)}
             alt={`${title} - ${subtitle} ${description}`}
             fill
             className="object-cover"

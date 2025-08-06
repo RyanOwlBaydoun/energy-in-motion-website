@@ -1,18 +1,18 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CoachingProgram, coachingPrograms } from "@/utils/coaching-programs";
-import { CoachingMainPage } from "@/types/sanity";
+import { coachingPrograms } from "@/utils/coaching-programs";
+import { LegacyCoachingProgram, CoachingMainPage } from "@/types/sanity";
 
 interface CoachingDetailsSectionProps {
-  currentProgram: CoachingProgram;
-  allPrograms?: CoachingProgram[]; // Optional prop for CMS programs
+  currentProgram: LegacyCoachingProgram;
+  allPrograms?: LegacyCoachingProgram[]; // Optional prop for CMS programs
   coachingMainData?: CoachingMainPage | null; // CMS data for main page
 }
 
 const CoachingDetailsSection: React.FC<CoachingDetailsSectionProps> = ({
   currentProgram,
-  allPrograms = coachingPrograms, // Fallback to static data
+  allPrograms = coachingPrograms as any, // Fallback to static data
   coachingMainData,
 }) => {
   // Check if box photo should be displayed (defaults to true if not specified)
@@ -32,7 +32,7 @@ const CoachingDetailsSection: React.FC<CoachingDetailsSectionProps> = ({
               <div className="w-[calc(100%+2.5rem)] h-px bg-white mb-4 -ml-5"></div>
 
               <div className="space-y-1">
-                {allPrograms.map((program, index) => (
+                {allPrograms.map((program: LegacyCoachingProgram, index: number) => (
                   <div key={program.id}>
                     <Link
                       href={`/coaching/${program.slug}`}

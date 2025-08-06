@@ -36,12 +36,15 @@ const TrainingHeroSection: React.FC<TrainingHeroSectionProps> = ({
 
   // Default values if no CMS data
   const title = trainingMainData?.title || "TRAINING";
-  const subtitle = trainingMainData?.subtitle || "Empower Teams.";
-  const description = trainingMainData?.description || "Elevate Performance.";
+  const subtitle = trainingMainData?.subtitle || "Leadership. Growth.";
+  const description = trainingMainData?.description || "Excellence.";
   const heroImageUrl = trainingMainData?.heroImage
     ? getImageUrl(trainingMainData.heroImage)
     : "/images/programs/Training_Hero.png";
   const overlayOpacity = trainingMainData?.heroOverlayOpacity || 0.4;
+
+  // Ensure heroImageUrl is always a string
+  const finalHeroImageUrl = heroImageUrl || "/images/programs/Training_Hero.png";
 
   return (
     <section className="w-full bg-white">
@@ -49,7 +52,7 @@ const TrainingHeroSection: React.FC<TrainingHeroSectionProps> = ({
         {/* Hero Image with Overlay - Rectangular Form - Matches About/Coaching Pages */}
         <div className="relative rounded-[24px] w-full h-[315px] md:h-[400px] overflow-hidden">
           <Image
-            src={getCacheBustedImageUrl(heroImageUrl)}
+            src={getCacheBustedImageUrl(finalHeroImageUrl)}
             alt={`${title} - ${subtitle} ${description}`}
             fill
             className="object-cover"

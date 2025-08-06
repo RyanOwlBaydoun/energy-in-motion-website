@@ -23,15 +23,18 @@ const ProgramCard: React.FC<ProgramCardProps> = ({
   image,
 }) => {
   const imageUrl = image
-    ? getSanityImageUrl(image).width(260).height(200).url()
+    ? getSanityImageUrl(image).width(266).height(200).url()
     : "/images/programs/workshop-group.jpg";
+
+  // Ensure imageUrl is always a string
+  const finalImageUrl = imageUrl || "/images/programs/workshop-group.jpg";
 
   return (
     <div className="rounded-[28px] overflow-hidden border border-gray-200 shadow-lg transition hover:shadow-xl bg-white max-w-[260px] mx-auto">
       {/* Image with Badge */}
       <div className="relative w-full h-[200px]">
         <Image
-          src={imageUrl}
+          src={finalImageUrl}
           alt="Program image showing a leadership group session"
           fill
           className="object-cover"

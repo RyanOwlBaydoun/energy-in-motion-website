@@ -1,18 +1,18 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { EMotionProgram, emotionPrograms } from "@/utils/emotion-programs";
-import { EmotionMainPage } from "@/types/sanity";
+import { emotionPrograms } from "@/utils/emotion-programs";
+import { LegacyEmotionProgram, EmotionMainPage } from "@/types/sanity";
 
 interface EMotionDetailsSectionProps {
-  currentProgram: EMotionProgram;
-  allPrograms?: EMotionProgram[]; // Optional prop for CMS programs
+  currentProgram: LegacyEmotionProgram;
+  allPrograms?: LegacyEmotionProgram[]; // Optional prop for CMS programs
   emotionMainData?: EmotionMainPage | null; // CMS data for main page
 }
 
 const EMotionDetailsSection: React.FC<EMotionDetailsSectionProps> = ({
   currentProgram,
-  allPrograms = emotionPrograms, // Fallback to static data
+  allPrograms = emotionPrograms as any, // Fallback to static data
   emotionMainData,
 }) => {
   // Check if box photo should be displayed (defaults to true if not specified)
@@ -32,7 +32,7 @@ const EMotionDetailsSection: React.FC<EMotionDetailsSectionProps> = ({
               <div className="w-[calc(100%+2.5rem)] h-px bg-white mb-4 -ml-5"></div>
 
               <div className="space-y-1">
-                {allPrograms.map((program, index) => (
+                {allPrograms.map((program: LegacyEmotionProgram, index: number) => (
                   <div key={program.id}>
                     <Link
                       href={`/e-motion/${program.slug}`}

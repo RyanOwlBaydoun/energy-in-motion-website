@@ -26,12 +26,15 @@ const BlogCard: React.FC<BlogCardProps> = ({
     ? getSanityImageUrl(image).width(266).height(200).url()
     : "/images/services/Industry_Insight_1.JPG";
 
+  // Ensure imageUrl is always a string
+  const finalImageUrl = imageUrl || "/images/services/Industry_Insight_1.JPG";
+
   return (
     <div className="flex gap-6 items-start p-2 transition-all duration-300 w-full">
       {/* Blog Image - Much Larger and More Prominent */}
       <div className="flex-shrink-0">
         <Image
-          src={imageUrl}
+          src={finalImageUrl}
           alt={`Thumbnail of blog post about ${title}`}
           width={266}
           height={200}
