@@ -5,7 +5,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 const token = process.env.SANITY_API_TOKEN;
 
 // Ensure projectId is lowercase and only contains valid characters
-const normalizedProjectId = projectId.toLowerCase().replace(/[^a-z0-9-]/g, '');
+const normalizedProjectId = projectId.toLowerCase().replace(/[^a-z0-9-]/g, "").trim();
 
 if (!normalizedProjectId || !dataset) {
   throw new Error("Missing Sanity project configuration");
@@ -42,7 +42,7 @@ export function urlFor(source: any) {
   const extension = parts.pop();
   const imageId = parts.join("-");
 
-  return `https://cdn.sanity.io/images/${normalizedProjectId}/${dataset}/${imageId}.${extension}`;
+  return `https://cdn.sanity.io/images/${normalizedProjectId.trim()}/${dataset}/${imageId}.${extension}`;
 }
 
 // Enhanced utility function for image URLs with width/height
@@ -60,7 +60,7 @@ export function getSanityImageUrl(source: any) {
   const extension = parts.pop();
   const imageId = parts.join("-");
 
-  const baseUrl = `https://cdn.sanity.io/images/${normalizedProjectId}/${dataset}/${imageId}.${extension}`;
+  const baseUrl = `https://cdn.sanity.io/images/${normalizedProjectId.trim()}/${dataset}/${imageId}.${extension}`;
 
   return {
     width: (w: number) => ({

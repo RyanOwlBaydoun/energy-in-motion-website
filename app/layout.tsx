@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   keywords:
     "leadership coaching, emotional intelligence, organizational transformation, executive coaching, leadership development",
   authors: [{ name: "Energy In Motion" }],
+  icons: {
+    icon: '/images/icons/logo/logo.svg',
+  },
   openGraph: {
     title: "Energy In Motion - Transforming Individuals & Organizations",
     description:
