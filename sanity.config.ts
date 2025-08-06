@@ -3,7 +3,7 @@ import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 
 // Import all schemas from the complete schema collection
-import { schemaTypes } from "./energy-in-motion/schemaTypes";
+import { schemaTypes } from "./schemaTypes";
 
 export default defineConfig({
   name: "energy-in-motion",
