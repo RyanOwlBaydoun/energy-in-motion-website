@@ -68,7 +68,11 @@ const TrainingHeroSection: React.FC<TrainingHeroSectionProps> = ({
           {/* Logo - Clickable, matches homepage exactly */}
           <Link
             href="/"
-            className="absolute top-6 left-6 z-20 text-white text-sm font-semibold leading-tight hover:opacity-80 transition-opacity cursor-pointer"
+            className="absolute top-6 left-6 z-20 text-white font-semibold leading-tight hover:opacity-80 transition-opacity cursor-pointer"
+            style={{
+              maxWidth: 'var(--logo-max-width)',
+              width: 'var(--logo-width-desktop)'
+            }}
           >
             <span className="block text-white">ENERGY IN</span>
             <span className="block font-cursive text-yellow-400 text-2xl -mt-1">
@@ -77,7 +81,10 @@ const TrainingHeroSection: React.FC<TrainingHeroSectionProps> = ({
           </Link>
 
           {/* Navigation Bar - Top Right */}
-          <nav className="absolute top-6 right-6 z-30 text-white text-sm font-medium hidden md:flex items-center">
+          <nav
+            className="absolute top-6 right-6 z-30 text-white font-medium hidden md:flex items-center"
+            style={{ fontSize: 'var(--nav-font-size)', letterSpacing: 'var(--nav-letter-spacing)' as any }}
+          >
             <Link
               href="/about"
               className="hover:text-yellow-400 transition-colors"
