@@ -55,6 +55,8 @@ const ServicesSectionCMS: React.FC<ServicesSectionCMSProps> = ({
     homeData?.servicesSection?.sectionSubtitle || "Drive Growth";
   const ctaButtonText =
     homeData?.servicesSection?.ctaButtonText || "Explore Programs";
+  const ctaHref = homeData?.servicesSection?.ctaHref || "/training";
+  const ctaStyle = homeData?.servicesSection?.ctaStyle || 'primary';
 
   // Build services data from CMS or use original fallback
   const servicesData = homeData?.servicesSection?.tabs?.reduce(
@@ -246,9 +248,16 @@ const ServicesSectionCMS: React.FC<ServicesSectionCMSProps> = ({
         {/* CTA Button - Left Aligned with Title */}
         <div className="relative pb-16">
           <div className="absolute" style={{ left: "5%" }}>
-            <button className="bg-[#f7c500] hover:bg-yellow-400 text-black font-semibold py-2 px-6 rounded-full shadow">
+            <a
+              href={ctaHref}
+              className={
+                ctaStyle === 'secondary'
+                  ? 'bg-transparent border border-[#f7c500] text-[#0B2B2E] hover:bg-[#fff4cc] font-semibold py-2 px-6 rounded-full shadow'
+                  : 'bg-[#f7c500] hover:bg-yellow-400 text-black font-semibold py-2 px-6 rounded-full shadow'
+              }
+            >
               {ctaButtonText}
-            </button>
+            </a>
           </div>
         </div>
       </div>

@@ -4,6 +4,9 @@ import { SanityImage } from "./sanity";
 export interface HomeMainPage {
   _id: string;
   heroSection: {
+    minHeightDesktopPx?: number;
+    minHeightMobilePx?: number;
+    bottomSpacingPx?: number;
     backgroundImage: SanityImage;
     overlayOpacity: number;
     mainTitle1: string;
@@ -12,6 +15,12 @@ export interface HomeMainPage {
     subtitle: string;
     ctaButtonText: string;
     ctaButtonLink: string;
+  };
+  bookingSection?: {
+    headingSize?: string;
+    bodySize?: string;
+    buttonLabel?: string;
+    buttonHref?: string;
   };
   energyInMotionSection: {
     content: string;
@@ -25,6 +34,9 @@ export interface HomeMainPage {
       services: Array<{
         serviceName: string;
         serviceSubname: string;
+        iconSource?: 'upload' | 'library';
+        iconSvg?: any;
+        iconKey?: string;
       }>;
     }>;
   };
@@ -48,11 +60,23 @@ export interface HomeMainPage {
     tabs: Array<{
       tabName: string;
       programs: Array<{
+        _type: string;
+        _id: string;
         title: string;
+        slug: { current: string };
         description: string;
         category: string;
-        image: SanityImage;
+        heroImage?: SanityImage;
       }>;
+      overrides?: Array<{
+        overrideTitle?: string;
+        overrideExcerpt?: string;
+        overrideCtaLabel?: string;
+        overrideCtaHref?: string;
+      }>;
+      cardMaxWidthPx?: number;
+      cardsPerRowDesktop?: number;
+      cardsPerRowMobile?: number;
     }>;
   };
   aboutSarahSection: {
@@ -61,6 +85,9 @@ export interface HomeMainPage {
     subtitle: string;
     description: string;
     photo: SanityImage;
+    imageAspectRatio?: string;
+    containerWidthPercentDesktop?: number;
+    containerWidthPercentMobile?: number;
     credentials: string[];
     buttonText: string;
     buttonLink: string;

@@ -11,6 +11,7 @@ import sarahMainPage from './sarah-main-page'
 import homeMainPage from './home-main-page'
 import testimonial from './testimonial'
 import booking from './booking'
+import siteSettings from './site-settings'
 
 export const schemaTypes = [
   trainingCourse,
@@ -26,4 +27,5 @@ export const schemaTypes = [
   homeMainPage,
   testimonial,
   booking,
+  siteSettings,
 ]

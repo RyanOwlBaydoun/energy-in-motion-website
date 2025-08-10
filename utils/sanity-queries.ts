@@ -474,6 +474,9 @@ export const HOME_MAIN_PAGE_QUERY = `
   *[_type == "homeMainPage"][0] {
     _id,
     heroSection {
+      minHeightDesktopPx,
+      minHeightMobilePx,
+      bottomSpacingPx,
       backgroundImage,
       overlayOpacity,
       mainTitle1,
@@ -490,11 +493,16 @@ export const HOME_MAIN_PAGE_QUERY = `
       sectionTitle,
       sectionSubtitle,
       ctaButtonText,
+      ctaHref,
+      ctaStyle,
       tabs[] {
         tabName,
         services[] {
           serviceName,
-          serviceSubname
+          serviceSubname,
+          iconSource,
+          iconSvg,
+          iconKey
         }
       }
     },
@@ -503,6 +511,7 @@ export const HOME_MAIN_PAGE_QUERY = `
       sectionSubtitle,
       sectionDescription,
       ctaButtonText,
+      ctaHref,
       leftAssessments[] {
         title,
         description
@@ -517,12 +526,24 @@ export const HOME_MAIN_PAGE_QUERY = `
       sectionSubtitle,
       tabs[] {
         tabName,
-        programs[] {
+        programs[]-> {
+          _type,
+          _id,
           title,
+          slug,
           description,
           category,
-          image
-        }
+          heroImage
+        },
+        overrides[] {
+          overrideTitle,
+          overrideExcerpt,
+          overrideCtaLabel,
+          overrideCtaHref
+        },
+        cardMaxWidthPx,
+        cardsPerRowDesktop,
+        cardsPerRowMobile
       }
     },
     aboutSarahSection {
@@ -531,6 +552,9 @@ export const HOME_MAIN_PAGE_QUERY = `
       subtitle,
       description,
       photo,
+      imageAspectRatio,
+      containerWidthPercentDesktop,
+      containerWidthPercentMobile,
       credentials,
       buttonText,
       buttonLink
@@ -567,10 +591,42 @@ export const HOME_MAIN_PAGE_QUERY = `
         order
       }
     },
+    bookingSection {
+      headingSize,
+      bodySize,
+      buttonLabel,
+      buttonHref
+    },
     metaTitle,
     metaDescription
   }
 `;
+
+export const SITE_SETTINGS_QUERY = `
+  *[_type == "siteSettings"][0] {
+    _id,
+    logoWidthPercentDesktop,
+    logoWidthPercentMobile,
+    logoMaxWidthPx,
+    navFontSize,
+    navLetterSpacing,
+    contentMaxWidthPx,
+    containerPaddingXDesktop,
+    containerPaddingXMobile,
+    gridGutterDesktop,
+    gridGutterMobile
+  }
+`;
+
+export async function getSiteSettings(): Promise<any | null> {
+  try {
+    const data = await sanityClient.fetch(SITE_SETTINGS_QUERY);
+    return data;
+  } catch (error) {
+    console.error("Error fetching site settings:", error);
+    return null;
+  }
+}
 
 export async function getHomeMainPage(): Promise<HomeMainPage | null> {
   try {

@@ -11,6 +11,25 @@ export default {
       title: 'Hero Section',
       type: 'object',
       fields: [
+        // Sizing controls
+        {
+          name: 'minHeightDesktopPx',
+          title: 'Min Height (Desktop, px)',
+          type: 'number',
+          initialValue: 840,
+        },
+        {
+          name: 'minHeightMobilePx',
+          title: 'Min Height (Mobile, px)',
+          type: 'number',
+          initialValue: 560,
+        },
+        {
+          name: 'bottomSpacingPx',
+          title: 'Bottom Spacing (px)',
+          type: 'number',
+          initialValue: 80,
+        },
         {
           name: 'backgroundImage',
           title: 'Background Image',
@@ -107,6 +126,19 @@ export default {
           initialValue: 'Explore Programs',
         },
         {
+          name: 'ctaHref',
+          title: 'CTA Href',
+          type: 'url',
+          initialValue: '/training',
+        },
+        {
+          name: 'ctaStyle',
+          title: 'CTA Style',
+          type: 'string',
+          options: { list: [ {title: 'Primary', value: 'primary'}, {title: 'Secondary', value: 'secondary'} ], layout: 'radio' },
+          initialValue: 'primary',
+        },
+        {
           name: 'tabs',
           title: 'Service Tabs',
           type: 'array',
@@ -136,6 +168,33 @@ export default {
                           name: 'serviceSubname',
                           title: 'Service Subname',
                           type: 'string',
+                        },
+                        // Global icons per service/program/feature
+                        {
+                          name: 'iconSource',
+                          title: 'Icon Source',
+                          type: 'string',
+                          options: {
+                            list: [
+                              {title: 'Upload', value: 'upload'},
+                              {title: 'Library', value: 'library'},
+                            ],
+                            layout: 'radio',
+                          },
+                        },
+                        {
+                          name: 'iconSvg',
+                          title: 'Icon SVG (Upload)',
+                          type: 'file',
+                          options: {accept: 'image/svg+xml'},
+                          hidden: ({parent}: any) => parent?.iconSource !== 'upload',
+                        },
+                        {
+                          name: 'iconKey',
+                          title: 'Icon Library Key',
+                          type: 'string',
+                          description: 'e.g., lucide icon name',
+                          hidden: ({parent}: any) => parent?.iconSource !== 'library',
                         },
                       ],
                     },
@@ -215,6 +274,12 @@ export default {
           title: 'CTA Button Text',
           type: 'string',
           initialValue: 'Book an EQ Assessment',
+        },
+        {
+          name: 'ctaHref',
+          title: 'CTA Href',
+          type: 'url',
+          initialValue: '/assessments',
         },
         {
           name: 'leftAssessments',
@@ -322,41 +387,33 @@ export default {
                 },
                 {
                   name: 'programs',
-                  title: 'Programs',
+                  title: 'Programs (Manual Selection)',
                   type: 'array',
-                  validation: (Rule: any) =>
-                    Rule.max(3).error('Maximum 3 programs allowed per tab'),
+                  of: [
+                    { type: 'reference', to: [{type: 'trainingCourse'}, {type: 'coachingProgram'}, {type: 'emotionProgram'}] },
+                  ],
+                },
+                // Per-card overrides
+                {
+                  name: 'overrides',
+                  title: 'Per-card Overrides (by index)',
+                  type: 'array',
                   of: [
                     {
                       type: 'object',
                       fields: [
-                        {
-                          name: 'title',
-                          title: 'Program Title',
-                          type: 'string',
-                        },
-                        {
-                          name: 'description',
-                          title: 'Program Description',
-                          type: 'text',
-                        },
-                        {
-                          name: 'category',
-                          title: 'Category Badge',
-                          type: 'string',
-                        },
-                        {
-                          name: 'image',
-                          title: 'Program Image',
-                          type: 'image',
-                          options: {
-                            hotspot: true,
-                          },
-                        },
+                        {name: 'overrideTitle', title: 'Override Title', type: 'string'},
+                        {name: 'overrideExcerpt', title: 'Override Excerpt', type: 'text'},
+                        {name: 'overrideCtaLabel', title: 'Override CTA Label', type: 'string'},
+                        {name: 'overrideCtaHref', title: 'Override CTA Href', type: 'url'},
                       ],
                     },
                   ],
                 },
+                // Card width consistency controls
+                { name: 'cardMaxWidthPx', title: 'Card Max Width (px)', type: 'number', initialValue: 260 },
+                { name: 'cardsPerRowDesktop', title: 'Cards Per Row (Desktop)', type: 'number', initialValue: 3 },
+                { name: 'cardsPerRowMobile', title: 'Cards Per Row (Mobile)', type: 'number', initialValue: 1 },
               ],
             },
           ],
@@ -434,6 +491,10 @@ export default {
             hotspot: true,
           },
         },
+        // Image container controls
+        { name: 'imageAspectRatio', title: 'Image Aspect Ratio (e.g., 4/5)', type: 'string' },
+        { name: 'containerWidthPercentDesktop', title: 'Container Width % (Desktop)', type: 'number', initialValue: 45 },
+        { name: 'containerWidthPercentMobile', title: 'Container Width % (Mobile)', type: 'number', initialValue: 90 },
         {
           name: 'credentials',
           title: 'Credentials',

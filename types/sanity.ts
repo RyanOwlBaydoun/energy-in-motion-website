@@ -44,6 +44,20 @@ export interface TrainingCourse {
   displayBoxPhoto?: boolean;
 }
 
+export interface SiteSettings {
+  _id: string;
+  logoWidthPercentDesktop?: number;
+  logoWidthPercentMobile?: number;
+  logoMaxWidthPx?: number;
+  navFontSize?: string;
+  navLetterSpacing?: number;
+  contentMaxWidthPx?: number;
+  containerPaddingXDesktop?: number;
+  containerPaddingXMobile?: number;
+  gridGutterDesktop?: number;
+  gridGutterMobile?: number;
+}
+
 export interface TrainingMainPage {
   _id: string;
   title: string;

@@ -9,6 +9,27 @@ export default {
       type: 'string',
       validation: (Rule: any) => Rule.required(),
     },
+    // Optional icon controls
+    {
+      name: 'iconSource',
+      title: 'Icon Source',
+      type: 'string',
+      options: { list: [{title: 'Upload', value: 'upload'}, {title: 'Library', value: 'library'}], layout: 'radio' },
+    },
+    {
+      name: 'iconSvg',
+      title: 'Icon SVG (Upload)',
+      type: 'file',
+      options: { accept: 'image/svg+xml' },
+      hidden: ({parent}: any) => parent?.iconSource !== 'upload',
+    },
+    {
+      name: 'iconKey',
+      title: 'Icon Library Key',
+      type: 'string',
+      description: 'e.g., lucide icon name',
+      hidden: ({parent}: any) => parent?.iconSource !== 'library',
+    },
     {
       name: 'slug',
       title: 'Slug',

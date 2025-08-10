@@ -71,12 +71,17 @@ const LatestProgramsSectionCMS: React.FC<LatestProgramsSectionCMSProps> = ({
   // Build programs data from CMS or use original fallback
   const programsData = homeData?.latestProgramsSection?.tabs?.reduce(
     (acc, tab) => {
-      acc[tab.tabName] = tab.programs.map((program) => ({
-        title: program.title,
-        description: program.description,
-        category: program.category,
-        image: program.image,
-      }));
+      const items = tab.programs.map((program: any, index: number) => {
+        const override = tab.overrides?.[index];
+        const title = override?.overrideTitle || program.title;
+        const description = override?.overrideExcerpt || program.description;
+        const category = program.category;
+        const image = program.heroImage || program.image;
+        const ctaLabel = override?.overrideCtaLabel;
+        const ctaHref = override?.overrideCtaHref;
+        return { title, description, category, image, ctaLabel, ctaHref };
+      });
+      acc[tab.tabName] = items;
       return acc;
     },
     {} as Record<string, any[]>
@@ -165,7 +170,10 @@ const LatestProgramsSectionCMS: React.FC<LatestProgramsSectionCMSProps> = ({
 
   return (
     <section className="w-full bg-white pb-48">
-      <div className="max-w-[1200px] mx-auto py-[6rem] pb-[10rem] px-6 bg-[#e6dfdb] rounded-[32px] relative">
+      <div
+        className="mx-auto py-[6rem] pb-[10rem] px-6 bg-[#e6dfdb] rounded-[32px] relative"
+        style={{ maxWidth: '1200px' }}
+      >
         {/* Header: Title Left + Tabs Right - Same Line */}
         <div className="relative mb-12">
           {/* Section Title - Aligned with Image Containers */}
@@ -227,26 +235,27 @@ const LatestProgramsSectionCMS: React.FC<LatestProgramsSectionCMSProps> = ({
         </div>
 
         {/* Programs Grid - Overlapping Container */}
-        <div
-          className="absolute grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
-          style={{
-            paddingLeft: "8%",
-            paddingRight: "8%",
-            bottom: "-55%",
-            left: "0",
-          }}
-        >
-          {programsData[activeTab as keyof typeof programsData]?.map(
-            (program, index) => (
-              <ProgramCard
-                key={`${activeTab}-${index}`}
-                title={program.title}
-                description={program.description}
-                category={program.category}
-                image={program.image}
-              />
-            )
-          )}
+        <div className="absolute w-full" style={{ bottom: "-55%", left: 0 }}>
+          <div
+            className="grid gap-8"
+            style={{
+              paddingLeft: "8%",
+              paddingRight: "8%",
+              gridTemplateColumns: `repeat(${homeData?.latestProgramsSection?.tabs?.[0]?.cardsPerRowDesktop || 3}, minmax(0, 1fr))`,
+            }}
+          >
+            {programsData[activeTab as keyof typeof programsData]?.map(
+              (program, index) => (
+                <ProgramCard
+                  key={`${activeTab}-${index}`}
+                  title={program.title}
+                  description={program.description}
+                  category={program.category}
+                  image={program.image}
+                />
+              )
+            )}
+          </div>
         </div>
       </div>
     </section>

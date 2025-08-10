@@ -35,6 +35,9 @@ const HeroSectionCMS: React.FC<HeroSectionCMSProps> = ({ homeData }) => {
     ? getSanityImageUrl(homeData.heroSection.backgroundImage)
     : "/images/hero/hero-coach.jpg";
   const overlayOpacity = homeData?.heroSection?.overlayOpacity || 0.4;
+  const minHeightDesktopPx = homeData?.heroSection?.minHeightDesktopPx || 840;
+  const minHeightMobilePx = homeData?.heroSection?.minHeightMobilePx || 560;
+  const bottomSpacingPx = homeData?.heroSection?.bottomSpacingPx || 80;
   const mainTitle1 = homeData?.heroSection?.mainTitle1 || "Empower.";
   const mainTitle2 = homeData?.heroSection?.mainTitle2 || "Evolve.";
   const mainTitle3 = homeData?.heroSection?.mainTitle3 || "Energize.";
@@ -59,6 +62,11 @@ const HeroSectionCMS: React.FC<HeroSectionCMSProps> = ({ homeData }) => {
                 shadow-lg
                 overflow-hidden
             "
+          style={{
+            // Apply CMS-controlled sizing
+            minHeight: `clamp(${minHeightMobilePx}px, 80vh, ${minHeightDesktopPx}px)`,
+            marginBottom: `${bottomSpacingPx}px`,
+          }}
         >
           {/* Background Image - Fixed within non-fixed container */}
           <div className="absolute inset-0 z-0 overflow-hidden">

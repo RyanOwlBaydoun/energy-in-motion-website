@@ -29,7 +29,13 @@ export default async function Home() {
       <InstagramSectionCMS homeData={homeMainData} />
       <TestimonialsSectionCMS homeData={homeMainData} />
       <IndustryInsightsSectionCMS homeData={homeMainData} />
-      <BookingForm sourcePage="home" />
+      <BookingForm
+        sourcePage="home"
+        headingSize={homeMainData?.bookingSection?.headingSize}
+        bodySize={homeMainData?.bookingSection?.bodySize}
+        buttonLabel={homeMainData?.bookingSection?.buttonLabel}
+        buttonHref={homeMainData?.bookingSection?.buttonHref}
+      />
       <Footer />
     </main>
   );

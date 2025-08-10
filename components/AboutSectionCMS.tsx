@@ -48,6 +48,9 @@ const AboutSectionCMS: React.FC<AboutSectionCMSProps> = ({
   const photoUrl = sarahData?.photo
     ? getSanityImageUrl(sarahData.photo)
     : "/images/about/sarah-dao.jpg";
+  const imageAspectRatio = sarahData?.imageAspectRatio || '4/5';
+  const containerWidthPercentDesktop = sarahData?.containerWidthPercentDesktop || 45;
+  const containerWidthPercentMobile = sarahData?.containerWidthPercentMobile || 90;
   const credentials = sarahData?.credentials || [
     "Certified Hogan, ECR, ECR 360, ECR Youth Assessor",
     "Emotional Intelligence Practitioner – Six Seconds",
@@ -61,7 +64,12 @@ const AboutSectionCMS: React.FC<AboutSectionCMSProps> = ({
     <section className="w-full bg-white py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16">
         {/* Left Column - Image with Enhanced Logo Badge */}
-        <div className="relative">
+        <div
+          className="relative"
+          style={{
+            width: `${containerWidthPercentDesktop}%`,
+          }}
+        >
           {/* Enhanced Logo Badge - 20% Bigger, Centered on Left Side, Half Outside/Inside, 70% to Top */}
           <div
             className="absolute z-10 w-[144px] h-[144px] bg-[#FF6B57] rounded-full flex flex-col items-center justify-center text-white shadow-xl"
@@ -80,13 +88,15 @@ const AboutSectionCMS: React.FC<AboutSectionCMSProps> = ({
           </div>
 
           {/* Sarah's Image */}
-          <div className="rounded-[24px] overflow-hidden shadow-lg">
+          <div
+            className="rounded-[24px] overflow-hidden shadow-lg"
+            style={{ aspectRatio: imageAspectRatio as any }}
+          >
             <Image
               src={photoUrl}
               alt={`${title} - EQ Coach`}
-              width={400}
-              height={500}
-              className="w-[400px] h-[500px] object-cover"
+              fill
+              className="object-cover"
             />
           </div>
         </div>

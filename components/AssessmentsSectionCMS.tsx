@@ -58,6 +58,7 @@ const AssessmentsSectionCMS: React.FC<AssessmentsSectionCMSProps> = ({
     "Unlock your leadership and emotional\nintelligence potential with certified tools.";
   const ctaButtonText =
     homeData?.assessmentsSection?.ctaButtonText || "Book an EQ Assessment";
+  const ctaHref = homeData?.assessmentsSection?.ctaHref || "/assessments";
 
   // Left and right assessments from CMS or fallback
   const leftAssessments = homeData?.assessmentsSection?.leftAssessments || [
@@ -172,9 +173,12 @@ const AssessmentsSectionCMS: React.FC<AssessmentsSectionCMSProps> = ({
 
               {/* CTA Button - Raised to align with Psytech */}
               <div className="pt-4 -mt-4">
-                <button className="bg-[#FFD600] hover:bg-[#F2C200] text-black px-8 py-3 rounded-full text-base font-semibold transition-colors duration-300 shadow-md">
+                <a
+                  href={ctaHref}
+                  className="bg-[#FFD600] hover:bg-[#F2C200] text-black px-8 py-3 rounded-full text-base font-semibold transition-colors duration-300 shadow-md"
+                >
                   {ctaButtonText}
-                </button>
+                </a>
               </div>
             </div>
           </div>

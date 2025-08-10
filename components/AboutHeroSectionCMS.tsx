@@ -40,6 +40,7 @@ const AboutHeroSectionCMS: React.FC<AboutHeroSectionCMSProps> = ({
     aboutData?.heroSection?.backgroundImage
   );
   const overlayOpacity = aboutData?.heroSection?.overlayOpacity || 0.4;
+  // Global nav sizing via CSS variables will be applied in RootLayout using site settings
 
   return (
     <section className="w-full bg-white">

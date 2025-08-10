@@ -4,10 +4,18 @@ import React, { useState } from "react";
 
 interface BookingFormProps {
   sourcePage?: string;
+  headingSize?: string;
+  bodySize?: string;
+  buttonLabel?: string;
+  buttonHref?: string;
 }
 
 const BookingForm: React.FC<BookingFormProps> = ({
   sourcePage = "unknown",
+  headingSize,
+  bodySize,
+  buttonLabel,
+  buttonHref,
 }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -97,16 +105,23 @@ const BookingForm: React.FC<BookingFormProps> = ({
           {/* Left Side - Title and Description */}
           <div className="space-y-5 flex-shrink-0 text-left md:pr-6">
             <div className="space-y-1">
-              <h2 className="text-3xl md:text-4xl font-light text-[#E36B6B]">
+              <h2
+                className="font-light text-[#E36B6B]"
+                style={{ fontSize: headingSize || 'clamp(1.5rem, 2vw, 2rem)' }}
+              >
                 Book an
               </h2>
-              <h2 className="text-3xl md:text-4xl font-semibold text-[#E36B6B]">
+              <h2
+                className="font-semibold text-[#E36B6B]"
+                style={{ fontSize: headingSize || 'clamp(1.5rem, 2vw, 2rem)' }}
+              >
                 Appointment
               </h2>
             </div>
             <p className="text-gray-600 text-base leading-relaxed max-w-sm">
-              Take the first step toward your personal and professional growth!
-              Schedule a session today to explore
+              <span style={{ fontSize: bodySize || 'clamp(0.95rem, 1.2vw, 1.1rem)' }}>
+                Take the first step toward your personal and professional growth! Schedule a session today to explore
+              </span>
             </p>
           </div>
 
@@ -193,14 +208,23 @@ const BookingForm: React.FC<BookingFormProps> = ({
                 </div>
 
                 {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="mt-6 w-full py-3 bg-[#FEC122] hover:bg-[#e6ad1e] disabled:bg-gray-300 disabled:cursor-not-allowed rounded-full font-semibold text-gray-900 transition-colors duration-200 focus:ring-2 focus:ring-[#FEC122] focus:ring-offset-2 outline-none"
-                  aria-label="Book an appointment"
-                >
-                  {isSubmitting ? "Submitting..." : "Book an Appointment"}
-                </button>
+                {buttonHref ? (
+                  <a
+                    href={buttonHref}
+                    className="mt-6 w-full inline-flex justify-center py-3 bg-[#FEC122] hover:bg-[#e6ad1e] rounded-full font-semibold text-gray-900 transition-colors duration-200"
+                  >
+                    {buttonLabel || 'Book an Appointment'}
+                  </a>
+                ) : (
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="mt-6 w-full py-3 bg-[#FEC122] hover:bg-[#e6ad1e] disabled:bg-gray-300 disabled:cursor-not-allowed rounded-full font-semibold text-gray-900 transition-colors duration-200 focus:ring-2 focus:ring-[#FEC122] focus:ring-offset-2 outline-none"
+                    aria-label="Book an appointment"
+                  >
+                    {isSubmitting ? "Submitting..." : (buttonLabel || "Book an Appointment")}
+                  </button>
+                )}
               </form>
             </div>
           </div>
