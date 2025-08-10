@@ -29,6 +29,8 @@ export interface HomeMainPage {
     sectionTitle: string;
     sectionSubtitle: string;
     ctaButtonText: string;
+    ctaHref?: string;
+    ctaStyle?: 'primary' | 'secondary';
     tabs: Array<{
       tabName: string;
       services: Array<{
@@ -45,6 +47,7 @@ export interface HomeMainPage {
     sectionSubtitle: string;
     sectionDescription: string;
     ctaButtonText: string;
+    ctaHref?: string;
     leftAssessments: Array<{
       title: string;
       description: string;
