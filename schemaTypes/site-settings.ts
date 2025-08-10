@@ -12,6 +12,37 @@ export default {
       initialValue: 12,
       validation: (Rule: any) => Rule.min(1).max(100),
     },
+    // Per-part logo scaling (desktop/mobile)
+    {
+      name: 'logoEnergyScalePercentDesktop',
+      title: 'ENERGY IN Scale % (Desktop)',
+      type: 'number',
+      description: 'Scale of the “ENERGY IN” text relative to its base size (100 = unchanged)',
+      initialValue: 100,
+      validation: (Rule: any) => Rule.min(10).max(400),
+    },
+    {
+      name: 'logoEnergyScalePercentMobile',
+      title: 'ENERGY IN Scale % (Mobile)',
+      type: 'number',
+      initialValue: 100,
+      validation: (Rule: any) => Rule.min(10).max(400),
+    },
+    {
+      name: 'logoMotionScalePercentDesktop',
+      title: 'motion Scale % (Desktop)',
+      type: 'number',
+      description: 'Scale of the “motion” text relative to its base size (100 = unchanged)',
+      initialValue: 100,
+      validation: (Rule: any) => Rule.min(10).max(400),
+    },
+    {
+      name: 'logoMotionScalePercentMobile',
+      title: 'motion Scale % (Mobile)',
+      type: 'number',
+      initialValue: 100,
+      validation: (Rule: any) => Rule.min(10).max(400),
+    },
     {
       name: 'logoWidthPercentMobile',
       title: 'Logo Width % (Mobile)',

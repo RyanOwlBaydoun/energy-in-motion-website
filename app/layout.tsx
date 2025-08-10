@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "leadership coaching, emotional intelligence, organizational transformation, executive coaching, leadership development",
   authors: [{ name: "Energy In Motion" }],
   icons: {
-    icon: '/images/icons/logo/logo.svg',
+    icon: "/images/icons/logo/logo.svg",
   },
   openGraph: {
     title: "Energy In Motion - Transforming Individuals & Organizations",
@@ -31,11 +31,21 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const site = await getSiteSettings();
-  const navFontSize = site?.navFontSize || 'clamp(0.9rem, 0.7vw, 1.1rem)';
-  const navLetterSpacing = typeof site?.navLetterSpacing === 'number' ? `${site.navLetterSpacing}em` : undefined;
+  const navFontSize = site?.navFontSize || "clamp(0.9rem, 0.7vw, 1.1rem)";
+  const navLetterSpacing =
+    typeof site?.navLetterSpacing === "number"
+      ? `${site.navLetterSpacing}em`
+      : undefined;
   const logoDesktop = site?.logoWidthPercentDesktop ?? 12;
   const logoMobile = site?.logoWidthPercentMobile ?? 40;
   const logoMax = site?.logoMaxWidthPx ?? 150;
+  // Compute scale relative to current baseline (12% desktop, 40% mobile)
+  const logoScaleDesktop = Math.max(0.25, (Number(logoDesktop) || 12) / 12);
+  const logoScaleMobile = Math.max(0.25, (Number(logoMobile) || 40) / 40);
+  const energyScaleDesktop = Math.max(0.1, (Number(site?.logoEnergyScalePercentDesktop) || 100) / 100);
+  const energyScaleMobile = Math.max(0.1, (Number(site?.logoEnergyScalePercentMobile) || 100) / 100);
+  const motionScaleDesktop = Math.max(0.1, (Number(site?.logoMotionScalePercentDesktop) || 100) / 100);
+  const motionScaleMobile = Math.max(0.1, (Number(site?.logoMotionScalePercentMobile) || 100) / 100);
   const contentMax = site?.contentMaxWidthPx ?? 1280;
   const padXDesktop = site?.containerPaddingXDesktop ?? 24;
   const padXMobile = site?.containerPaddingXMobile ?? 16;
@@ -46,14 +56,22 @@ export default async function RootLayout({
         className={inter.className}
         style={{
           // Expose CMS-controlled variables site-wide
-          ['--nav-font-size' as any]: navFontSize,
-          ...(navLetterSpacing ? ({ ['--nav-letter-spacing' as any]: navLetterSpacing } as any) : {}),
-          ['--logo-width-desktop' as any]: `${logoDesktop}%`,
-          ['--logo-width-mobile' as any]: `${logoMobile}%`,
-          ['--logo-max-width' as any]: `${logoMax}px`,
-          ['--content-max-width' as any]: `${contentMax}px`,
-          ['--container-pad-x-desktop' as any]: `${padXDesktop}px`,
-          ['--container-pad-x-mobile' as any]: `${padXMobile}px`,
+          ["--nav-font-size" as any]: navFontSize,
+          ...(navLetterSpacing
+            ? ({ ["--nav-letter-spacing" as any]: navLetterSpacing } as any)
+            : {}),
+          ["--logo-width-desktop" as any]: `${logoDesktop}%`,
+          ["--logo-width-mobile" as any]: `${logoMobile}%`,
+          ["--logo-max-width" as any]: `${logoMax}px`,
+          ["--logo-scale-desktop" as any]: `${logoScaleDesktop}`,
+          ["--logo-scale-mobile" as any]: `${logoScaleMobile}`,
+          ["--logo-energy-scale-desktop" as any]: `${energyScaleDesktop}`,
+          ["--logo-energy-scale-mobile" as any]: `${energyScaleMobile}`,
+          ["--logo-motion-scale-desktop" as any]: `${motionScaleDesktop}`,
+          ["--logo-motion-scale-mobile" as any]: `${motionScaleMobile}`,
+          ["--content-max-width" as any]: `${contentMax}px`,
+          ["--container-pad-x-desktop" as any]: `${padXDesktop}px`,
+          ["--container-pad-x-mobile" as any]: `${padXMobile}px`,
         }}
       >
         <CursorTrail />

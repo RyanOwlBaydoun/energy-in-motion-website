@@ -71,17 +71,22 @@ const LatestProgramsSectionCMS: React.FC<LatestProgramsSectionCMSProps> = ({
   // Build programs data from CMS or use original fallback
   const programsData = homeData?.latestProgramsSection?.tabs?.reduce(
     (acc, tab) => {
-      const items = tab.programs.map((program: any, index: number) => {
-        const override = tab.overrides?.[index];
-        const title = override?.overrideTitle || program.title;
-        const description = override?.overrideExcerpt || program.description;
-        const category = program.category;
-        const image = program.heroImage || program.image;
-        const ctaLabel = override?.overrideCtaLabel;
-        const ctaHref = override?.overrideCtaHref;
-        return { title, description, category, image, ctaLabel, ctaHref };
-      });
-      acc[tab.tabName] = items;
+      const rawPrograms = (tab as any)?.programs || [];
+      const items = rawPrograms
+        .filter((p: any) => !!p) // guard against null references
+        .map((program: any, index: number) => {
+          const override = (tab as any)?.overrides?.[index] || {};
+          const safeProgram = program || {};
+          const title = override.overrideTitle || safeProgram.title || "";
+          const description =
+            override.overrideExcerpt || safeProgram.description || "";
+          const category = safeProgram.category || "";
+          const image = safeProgram.heroImage || safeProgram.image || null;
+          const ctaLabel = override.overrideCtaLabel;
+          const ctaHref = override.overrideCtaHref;
+          return { title, description, category, image, ctaLabel, ctaHref };
+        });
+      acc[(tab as any).tabName] = items;
       return acc;
     },
     {} as Record<string, any[]>
@@ -172,7 +177,7 @@ const LatestProgramsSectionCMS: React.FC<LatestProgramsSectionCMSProps> = ({
     <section className="w-full bg-white pb-48">
       <div
         className="mx-auto py-[6rem] pb-[10rem] px-6 bg-[#e6dfdb] rounded-[32px] relative"
-        style={{ maxWidth: '1200px' }}
+        style={{ maxWidth: "1200px" }}
       >
         {/* Header: Title Left + Tabs Right - Same Line */}
         <div className="relative mb-12">

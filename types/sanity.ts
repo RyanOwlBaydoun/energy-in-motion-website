@@ -49,6 +49,10 @@ export interface SiteSettings {
   logoWidthPercentDesktop?: number;
   logoWidthPercentMobile?: number;
   logoMaxWidthPx?: number;
+  logoEnergyScalePercentDesktop?: number;
+  logoEnergyScalePercentMobile?: number;
+  logoMotionScalePercentDesktop?: number;
+  logoMotionScalePercentMobile?: number;
   navFontSize?: string;
   navLetterSpacing?: number;
   contentMaxWidthPx?: number;

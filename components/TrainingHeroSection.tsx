@@ -44,7 +44,8 @@ const TrainingHeroSection: React.FC<TrainingHeroSectionProps> = ({
   const overlayOpacity = trainingMainData?.heroOverlayOpacity || 0.4;
 
   // Ensure heroImageUrl is always a string
-  const finalHeroImageUrl = heroImageUrl || "/images/programs/Training_Hero.png";
+  const finalHeroImageUrl =
+    heroImageUrl || "/images/programs/Training_Hero.png";
 
   return (
     <section className="w-full bg-white">
@@ -70,12 +71,22 @@ const TrainingHeroSection: React.FC<TrainingHeroSectionProps> = ({
             href="/"
             className="absolute top-6 left-6 z-20 text-white font-semibold leading-tight hover:opacity-80 transition-opacity cursor-pointer"
             style={{
-              maxWidth: 'var(--logo-max-width)',
-              width: 'var(--logo-width-desktop)'
+              maxWidth: "var(--logo-max-width)",
+              width: "max(80px, var(--logo-width-desktop))",
+              transform: "scale(var(--logo-scale-desktop))",
+              transformOrigin: "top left",
             }}
           >
-            <span className="block text-white">ENERGY IN</span>
-            <span className="block font-cursive text-yellow-400 text-2xl -mt-1">
+            <span
+              className="block text-white"
+              style={{ transform: "scale(var(--logo-energy-scale-desktop))", transformOrigin: "top left" }}
+            >
+              ENERGY IN
+            </span>
+            <span
+              className="block font-cursive text-yellow-400 text-2xl -mt-1"
+              style={{ transform: "scale(var(--logo-motion-scale-desktop))", transformOrigin: "top left" }}
+            >
               motion
             </span>
           </Link>
@@ -83,7 +94,10 @@ const TrainingHeroSection: React.FC<TrainingHeroSectionProps> = ({
           {/* Navigation Bar - Top Right */}
           <nav
             className="absolute top-6 right-6 z-30 text-white font-medium hidden md:flex items-center"
-            style={{ fontSize: 'var(--nav-font-size)', letterSpacing: 'var(--nav-letter-spacing)' as any }}
+            style={{
+              fontSize: "var(--nav-font-size)",
+              letterSpacing: "var(--nav-letter-spacing)" as any,
+            }}
           >
             <Link
               href="/about"

@@ -21,7 +21,12 @@ const AboutHeroSectionCMS: React.FC<AboutHeroSectionCMSProps> = ({
     const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 
     // Clean projectId to remove any whitespace or line breaks
-    const normalizedProjectId = projectId.toString().toLowerCase().replace(/[^a-z0-9-]/g, "").replace(/\s+/g, "").trim();
+    const normalizedProjectId = projectId
+      .toString()
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, "")
+      .replace(/\s+/g, "")
+      .trim();
 
     // Extract image ID and extension from ref
     const parts = ref.replace("image-", "").split("-");
@@ -66,11 +71,18 @@ const AboutHeroSectionCMS: React.FC<AboutHeroSectionCMSProps> = ({
             href="/"
             className="absolute top-6 left-6 z-20 text-white font-semibold leading-tight hover:opacity-80 transition-opacity cursor-pointer"
             style={{
-              maxWidth: 'var(--logo-max-width)',
-              width: 'var(--logo-width-desktop)'
+              maxWidth: "var(--logo-max-width)",
+              width: "max(80px, var(--logo-width-desktop))",
+              transform: "scale(var(--logo-scale-desktop))",
+              transformOrigin: "top left",
             }}
           >
-            <span className="block text-white">ENERGY IN</span>
+            <span
+              className="block text-white"
+              style={{ transform: "scale(var(--logo-energy-scale-desktop))", transformOrigin: "top left" }}
+            >
+              ENERGY IN
+            </span>
             <span className="block font-cursive text-yellow-400 text-2xl -mt-1">
               motion
             </span>
@@ -79,7 +91,10 @@ const AboutHeroSectionCMS: React.FC<AboutHeroSectionCMSProps> = ({
           {/* Navigation Bar - Top Right */}
           <nav
             className="absolute top-6 right-6 z-30 text-white font-medium hidden md:flex items-center"
-            style={{ fontSize: 'var(--nav-font-size)', letterSpacing: 'var(--nav-letter-spacing)' as any }}
+            style={{
+              fontSize: "var(--nav-font-size)",
+              letterSpacing: "var(--nav-letter-spacing)" as any,
+            }}
           >
             <Link
               href="/about"
